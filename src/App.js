@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 
+/** antd */
+import { Button } from 'antd';
+import 'antd/dist/antd.css';
+
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <button>Ver listas</button>
-        <button>Crear listas</button>
-        <button>Ajustes</button>
+        <Button>Ver listas</Button>
+        <Button>Crear listas</Button>
+        <Button>Ajustes</Button>
       </div>
     );
   }
