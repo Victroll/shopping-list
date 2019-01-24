@@ -1,20 +1,32 @@
 import React from 'react';
 
-/** antd */
-import { Row, Col, Button } from 'antd';
+/** Components */
+import HomeCard from '../home-card';
+
+/** Literals */
+import { homeTxt } from '../../utils/literals';
+
+/** CSS */
+import './index.css';
 
 const Home = () => (
-  <Row type="flex" justify="space-around">
-    <Col span={6} offset={3}>
-      <Button>1</Button>
-    </Col>
-    <Col span={6}>
-      <Button>2</Button>
-    </Col>
-    <Col span={6}>
-      <Button>3</Button>
-    </Col>
-  </Row>
+  <div className='home'>
+    <HomeCard
+      icon="profile"
+      title={homeTxt.showLists}
+      buttonTxt={homeTxt.showListsButton}
+    />
+    <HomeCard
+      icon="edit"
+      title={homeTxt.newList}
+      buttonTxt={homeTxt.newListButton}
+    />
+    <HomeCard
+      icon="setting"
+      title={homeTxt.settings}
+      buttonTxt={homeTxt.settingsButton}
+    />
+  </div>
 );
 
 export default Home;

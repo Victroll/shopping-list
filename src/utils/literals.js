@@ -1,7 +1,8 @@
-const homeTxt = {
+export const homeTxt = {
   showLists: 'Ver listas',
+  showListsButton: 'Ver',
   newList: 'Crear nueva lista',
-  settings: 'Ajustes'
+  newListButton: 'Crear',
+  settings: 'Ajustes de usuario',
+  settingsButton: 'Ajustes'
 };
-
-export default { homeTxt };

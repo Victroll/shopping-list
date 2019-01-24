@@ -1,0 +1,13 @@
+.home {
+  display: flex;
+  flex-flow: column;
+  height: 90vh;
+  justify-content: space-evenly;
+}
+
+@media (min-width:961px) {
+  .home {
+    flex-flow: row;
+    padding-top: calc(45vh - 85px);
+  }
+}

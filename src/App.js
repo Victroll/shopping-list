@@ -6,15 +6,14 @@ import { Layout } from 'antd'
 /** Components */
 import Home from './components/home';
 
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 
 const App = () => (
-  <Layout>
-    <Header />
+  <Layout className='content'>
     <Content>
       <Home />
     </Content>
-    <Footer />
+    <Footer className='footer'>FOOTER</Footer>
   </Layout>
 );
 
