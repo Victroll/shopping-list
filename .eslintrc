@@ -1,0 +1,27 @@
+{
+  "extends": ["airbnb", "eslint:recommended", "plugin:react/recommended"],
+  "plugins": ["react", "jest"],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+        "jsx": true
+    }
+  },
+  "rules": {
+    "react/jsx-filename-extension": 0,
+    "react/require-default-props": 0,
+    "jest/no-disabled-tests": "error",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/valid-expect": "error",
+    "react/no-find-dom-node": 0,
+    "no-useless-escape": 0,
+    "no-console": 0,
+    "eol-last": 2
+  },
+  "env": {
+    "browser": true,
+    "jest/globals": true
+  }
+}
