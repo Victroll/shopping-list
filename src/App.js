@@ -1,15 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <button>Ver listas</button>
-        <button>Crear listas</button>
-        <button>Ajustes</button>
-      </div>
-    );
-  }
-}
+/** antd */
+import { Layout } from 'antd'
+
+/** Components */
+import Home from './components/home';
+
+const { Header, Content, Footer } = Layout;
+
+const App = () => (
+  <Layout>
+    <Header />
+    <Content>
+      <Home />
+    </Content>
+    <Footer />
+  </Layout>
+);
 
 export default App;
