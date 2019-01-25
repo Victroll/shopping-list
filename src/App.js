@@ -5,15 +5,16 @@ import { Layout } from 'antd'
 
 /** Components */
 import Home from './components/home';
+import GitHubCorner from './components/GitHub-corner';
 
-const { Content, Footer } = Layout;
+const { Content } = Layout;
 
 const App = () => (
   <Layout className='content'>
+    <GitHubCorner />
     <Content>
       <Home />
     </Content>
-    <Footer className='footer'>FOOTER</Footer>
   </Layout>
 );
 
