@@ -9,5 +9,6 @@
   .home {
     flex-flow: row;
     padding-top: calc(50vh - 85px);
+    width: 100%;
   }
 }

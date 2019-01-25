@@ -1,3 +1,5 @@
+import Faker from 'Faker';
+
 export const homeTxt = {
   showLists: 'Ver listas',
   showListsButton: 'Ver',
@@ -5,4 +7,42 @@ export const homeTxt = {
   newListButton: 'Crear',
   settings: 'Ajustes de usuario',
   settingsButton: 'Ajustes'
+};
+
+export const createNewListTxt = {
+  newTitle: {
+    title: 'Introduce el nombre de la lista',
+    placeholder: '"Fiesta de Francisco Castillo"'
+  },
+  newProduct: {
+    title: 'Nuevo producto',
+    name: 'Nombre del producto',
+    namePlaceholder: () => Faker.random.array_element([
+      'Berenjenas',
+      'Champú',
+      'Fregona',
+      'Comida del perro',
+      'Cebollas',
+      'Latas de tomate',
+      'Arroz',
+      'Friegaplatos',
+      'Pilas'
+    ]),
+    amount: 'Cantidad',
+    kg: '.kgs',
+    uds: '.uds'
+  },
+  cancelModalTitle: title => `Cancelar lista ${title}`,
+  cancelList: '¿Seguro que quieres cancelar la creación de esta lsita?',
+  finishModalTitle: 'Finalizar lista',
+  finishList: '¿Deseas finalizar y guardar la lista?',
+  success: title => `¡Lista ${title} guardada!`
+};
+
+export const commons = {
+  cancel: 'Cancelar',
+  next: 'Siguiente',
+  finish: 'Terminar',
+  back: 'Volver',
+  continue: 'Continuar'
 };

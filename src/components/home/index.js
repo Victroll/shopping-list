@@ -9,7 +9,22 @@ import { homeTxt } from '../../utils/literals';
 /** CSS */
 import './index.css';
 
-const Home = () => (
+/** Paths */
+import paths from '../../utils/paths';
+
+/** Models */
+import { historyModel } from '../../utils/models';
+
+/**
+ * Navigate to Create New List section.
+ * The url by default is: /createNewList
+ * @param {object} history 
+ */
+const goToCreateNewList = history => {
+  history.push(paths.newList);
+};
+
+const Home = ({ history }) => (
   <div className='home'>
     <HomeCard
       icon="profile"
@@ -20,6 +35,7 @@ const Home = () => (
       icon="edit"
       title={homeTxt.newList}
       buttonTxt={homeTxt.newListButton}
+      onClick={() => goToCreateNewList(history)}
     />
     <HomeCard
       icon="setting"
@@ -28,5 +44,9 @@ const Home = () => (
     />
   </div>
 );
+
+Home.propTypes = {
+  history: historyModel
+};
 
 export default Home;
