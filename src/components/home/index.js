@@ -17,11 +17,20 @@ import { historyModel } from '../../utils/models';
 
 /**
  * Navigate to Create New List section.
- * The url by default is: /createNewList
+ * The url by default is: /create-new-list
  * @param {object} history 
  */
 const goToCreateNewList = history => {
   history.push(paths.newList);
+};
+
+/**
+ * Navigate to Show Lists section.
+ * The url by default is: /show-lists
+ * @param {object} history 
+ */
+const goToShowLists = history => {
+  history.push(paths.showLists);
 };
 
 const Home = ({ history }) => (
@@ -30,6 +39,7 @@ const Home = ({ history }) => (
       icon="profile"
       title={homeTxt.showLists}
       buttonTxt={homeTxt.showListsButton}
+      onClick={() => goToShowLists(history)}
     />
     <HomeCard
       icon="edit"

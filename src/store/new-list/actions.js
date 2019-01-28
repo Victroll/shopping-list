@@ -40,3 +40,10 @@ export const saveList = dispatch => {
     type: TYPES.SAVE_LIST
   });
 };
+
+export const setList = (dispatch, products) => {
+  dispatch({
+    type: TYPES.SET_LIST,
+    products
+  });
+};

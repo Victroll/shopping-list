@@ -23,7 +23,7 @@ import FlowStateMachine from './utils/flowStateMachine';
 import paths from './utils/paths';
 
 /** States */
-import stateList from './utils/flowStates';
+import { createNewListStates, showListStates } from './utils/flowStates';
 
 import store from './store';
 
@@ -50,7 +50,20 @@ const App = () => (
                 <AppLayout>
                   <FlowStateMachine
                     {...props}
-                    stateList={stateList}
+                    stateList={createNewListStates}
+                    allowRecursivity
+                  />
+                </AppLayout>
+              )}
+            />
+            <Route
+              exact
+              path={paths.showLists}
+              render={props => (
+                <AppLayout>
+                  <FlowStateMachine
+                    {...props}
+                    stateList={showListStates}
                     allowRecursivity
                   />
                 </AppLayout>

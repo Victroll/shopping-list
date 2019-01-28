@@ -1,13 +1,18 @@
 import * as TYPES from './actionTypes';
 
 const initialState = {
-  title: 'TEST',
+  title: '',
   products: []
 };
 
 const reducer = (state = initialState, action) => {
   let newProducts;
   switch(action.type) {
+      case TYPES.SET_LIST:
+        return {
+          ...state,
+          products: action.products
+        };
       case TYPES.RESET:
         return {
           ...initialState

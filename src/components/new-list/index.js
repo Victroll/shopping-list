@@ -73,8 +73,9 @@ class NewList extends Component {
   };
 
   onFinishHandler = () => {
-    const { title, products, finish } = this.props;
+    const { title, products, finish, resetListHandler } = this.props;
     saveNewList(title, products);
+    resetListHandler();
     message.success(createNewListTxt.success(title));
     finish();
   };

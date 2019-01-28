@@ -9,6 +9,17 @@ export const homeTxt = {
   settingsButton: 'Ajustes'
 };
 
+export const showListsTable = {
+  title: 'Listas guardadas',
+  products: 'Productos: ',
+  reset: 'Reiniciar',
+  modal: {
+    title: '¿Sustituir lista?',
+    desc: list =>
+      `Ya tienes una lista abierta. ¿Quieres abrir la lista ${list} y perder la anterior?` // eslint-disable-line
+  }
+};
+
 export const createNewListTxt = {
   newTitle: {
     title: 'Introduce el nombre de la lista',

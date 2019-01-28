@@ -8,13 +8,19 @@ const LISTS = 'Lists';
 
 export const saveNewList = (title, list) => {
   // Get current lists and push the new one
-  const currentLists = window.localStorage.getItem(`${PRE}-${LISTS}`);
+  let currentLists = JSON.parse(window.localStorage.getItem(`${PRE}-${LISTS}`));
   if (currentLists === null) {
     window.localStorage.setItem(
       `${PRE}-${LISTS}`,
       JSON.stringify({
         [title]: list
       })
+    );
+  } else {
+    currentLists[title] = list;
+    window.localStorage.setItem(
+      `${PRE}-${LISTS}`,
+      JSON.stringify(currentLists)
     );
   }
 };
@@ -25,7 +31,19 @@ export const saveNewList = (title, list) => {
 export const getLists = () => {
   const lists = JSON.parse(window.localStorage.getItem(`${PRE}-${LISTS}`));
   if (lists === null) {
-    return [];
+    return {};
   }
   return lists;
+};
+
+export const removeList = id => {
+  const lists = JSON.parse(window.localStorage.getItem(`${PRE}-${LISTS}`));
+  const newLists = {...lists};
+  delete newLists[id];
+  window.localStorage.setItem(
+    `${PRE}-${LISTS}`,
+    JSON.stringify(newLists)
+  );
+
+  return newLists;
 };
