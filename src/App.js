@@ -34,7 +34,7 @@ const App = () => (
     <Layout>
       <GitHubCorner />
       <Content className='content'>
-        <Router basename='https://victroll.github.io/shopping-list'>
+        <Router>
           <Switch>
             <Route
               exact
