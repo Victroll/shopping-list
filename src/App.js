@@ -34,7 +34,7 @@ const App = () => (
     <Layout>
       <GitHubCorner />
       <Content className='content'>
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
           <Switch>
             <Route
               exact
