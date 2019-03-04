@@ -74,7 +74,8 @@ class NewList extends Component {
 
   onFinishHandler = () => {
     const { title, products, finish, resetListHandler } = this.props;
-    saveNewList(title, products);
+    // If the last item has no name, it shouldn't be included
+    saveNewList(title, products.filter(p => p.name !== ""));
     resetListHandler();
     message.success(createNewListTxt.success(title));
     finish();
