@@ -60,7 +60,7 @@ class ProductPanel extends Component {
   };
 
   render() {
-    const { onAdd, onRemove, id } = this.props;
+    const { onAdd, onRemove, removeDisabled } = this.props;
     const { name, amount, uds } = this.state;
     return (
       <Fragment>
@@ -101,7 +101,7 @@ class ProductPanel extends Component {
               icon='delete'
               shape='circle-outline'
               onClick={onRemove}
-              disabled={id === 0}
+              disabled={removeDisabled}
             />
           </div>
         </ProductInfoWrapper>
@@ -115,7 +115,8 @@ ProductPanel.propTypes = {
   onAdd: PropTypes.func,
   onRemove: PropTypes.func,
   updateProductHandler: PropTypes.func,
-  id: PropTypes.number
+  id: PropTypes.number,
+  removeDisabled: PropTypes.bool
 };
 
 const mapDispatchToProps = dispatch => ({

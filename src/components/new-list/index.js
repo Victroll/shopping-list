@@ -110,11 +110,12 @@ class NewList extends Component {
                 : products[i].name}
             >
               <ProductPanel
-                id={i}
                 key={i}
+                id={i}
                 onAdd={this.onAddHandler}
                 onRemove={() => this.onRemoveHandler(i)}
                 product={prod}
+                removeDisabled={products.length === 1}
               />
             </Panel>
           ))}
