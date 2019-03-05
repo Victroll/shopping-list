@@ -7,7 +7,26 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   let newProducts;
+  let prod;
   switch(action.type) {
+      case TYPES.MOVE_ITEM_UP:
+        newProducts = [...state.products];
+        prod = { ...newProducts[action.id - 1] };
+        newProducts[action.id - 1] = { ...newProducts[action.id] };
+        newProducts[action.id] = prod;
+        return {
+          ...state,
+          products: newProducts
+        };
+      case TYPES.MOVE_ITEM_DOWN:
+        newProducts = [...state.products];
+        prod = { ...newProducts[action.id + 1] };
+        newProducts[action.id + 1] = { ...newProducts[action.id] };
+        newProducts[action.id] = prod;
+        return {
+          ...state,
+          products: newProducts
+        };
       case TYPES.SET_LIST:
         return {
           ...state,

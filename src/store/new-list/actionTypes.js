@@ -5,3 +5,5 @@ export const UPDATE_FIELD = 'UPDATE_FIELD';
 export const RESET = 'RESET';
 export const SAVE_LIST = 'SAVE_LIST';
 export const SET_LIST = 'SET_LIST';
+export const MOVE_ITEM_UP = 'MOVE_ITEM_UP';
+export const MOVE_ITEM_DOWN = 'MOVE_ITEM_DOWN';

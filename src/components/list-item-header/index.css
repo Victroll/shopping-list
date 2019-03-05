@@ -1,0 +1,12 @@
+.list-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 1rem;
+}
+
+.list-item-header > .buttons > button {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}

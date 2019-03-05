@@ -47,3 +47,12 @@ export const setList = (dispatch, products) => {
     products
   });
 };
+
+export const moveItem = (dispatch, id, up) => {
+  dispatch({
+    type: up
+      ? TYPES.MOVE_ITEM_UP
+      : TYPES.MOVE_ITEM_DOWN,
+    id
+  });
+};

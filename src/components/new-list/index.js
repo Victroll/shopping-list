@@ -9,6 +9,7 @@ import { Collapse, Button, message } from 'antd';
 import ProductPanel from '../product-panel';
 import ButtonWrapper from '../button-wrapper';
 import SLModal from '../modal';
+import ListItemHeader from '../list-item-header/index';
 
 /** Models */
 import { productModel } from '../../utils/models';
@@ -17,7 +18,8 @@ import { productModel } from '../../utils/models';
 import {
   addProduct,
   removeProduct,
-  resetList
+  resetList,
+  moveItem
 } from '../../store/new-list/actions';
 import { saveNewList } from '../../utils/localStorage';
 
@@ -93,7 +95,7 @@ class NewList extends Component {
 
   render() {
     const { activeKey, showCancelModal, showFinishModal } = this.state;
-    const { products, title, prev } = this.props;
+    const { products, title, prev, moveItemHandler } = this.props;
     return (
       <Fragment>
         <h1>{title}</h1>
@@ -106,9 +108,20 @@ class NewList extends Component {
           {products.map((prod, i) => (
             <Panel
               key={`${i}`}
-              header={products[i] === undefined || products[i].name === ''
-                ? createNewListTxt.newProduct.title
-                : products[i].name}
+              header={
+                <ListItemHeader
+                  title={
+                    products[i] === products[i] === undefined ||
+                    products[i].name === ''
+                      ? createNewListTxt.newProduct.title
+                      : products[i].name
+                  }
+                  onMoveUp={() => moveItemHandler(i, true)}
+                  onMoveDown={() => moveItemHandler(i, false)}
+                  lastItem={i === products.length - 1}
+                  id={i}
+                />
+              }
             >
               <ProductPanel
                 key={i}
@@ -163,7 +176,8 @@ NewList.propTypes = {
   prev: PropTypes.func,
   cancel: PropTypes.func,
   resetListHandler: PropTypes.func,
-  finish: PropTypes.func
+  finish: PropTypes.func,
+  moveItemHandler: PropTypes.func
 };
 
 const mapStateToProps = ({ newListReducer: { products, title } }) => ({
@@ -174,7 +188,8 @@ const mapStateToProps = ({ newListReducer: { products, title } }) => ({
 const mapDispatchToProps = dispatch => ({
   addProductHandler: () => addProduct(dispatch),
   removeProductHandler: id => removeProduct(id, dispatch),
-  resetListHandler: () => resetList(dispatch)
+  resetListHandler: () => resetList(dispatch),
+  moveItemHandler: (id, up) => moveItem(dispatch, id, up)
 });
 
 export default connect(
