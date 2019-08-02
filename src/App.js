@@ -27,12 +27,16 @@ import { createNewListStates, showListStates } from './utils/flowStates';
 
 import store from './store';
 
+/** Components */
+import LoginButton from './components/login-button';
+
 const { Content } = Layout;
 
 const App = () => (
   <Provider store={store}>
     <Layout>
       <GitHubCorner />
+      <LoginButton />
       <Content className='content'>
         <Router basename={process.env.PUBLIC_URL}>
           <Switch>

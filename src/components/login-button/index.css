@@ -1,0 +1,8 @@
+.login-button {
+  position: absolute;
+  padding: 1rem;
+}
+
+.login-button > button {
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+}
