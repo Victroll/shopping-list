@@ -9,12 +9,11 @@ import {
 /** Constants */
 import { sessionStorageToken } from '../../utils/constants';
 
-export const logIn = (user, password, dispatch) => {
+export const logIn = (user, password, dispatch) =>
   logInAPI(user, password).then(({ data: { token } }) => {
     sessionStorage.setItem(sessionStorageToken,  token);
     dispatch({ type: LOG_IN, user });
-  }).catch(error => console.log(error));
-};
+  });
 
 export const logOut = dispatch => {
   sessionStorage.removeItem(sessionStorageToken);

@@ -1,5 +1,15 @@
 import Faker from 'Faker';
 
+export const loginTxt = {
+  loginSuccess: '¡Login correcto!',
+  login404: 'El usuario no existe',
+  login403: 'El password es incorrecto',
+  userPlaceholder: 'Introduce tu usuario',
+  passwordPlaceholder: 'Introduce tu contraseña',
+  userTitle: 'Usuario',
+  passwordTitle: 'Contraseña'
+};
+
 export const homeTxt = {
   showLists: 'Ver listas',
   showListsButton: 'Ver',
