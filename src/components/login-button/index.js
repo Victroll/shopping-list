@@ -46,7 +46,11 @@ class LoginButton extends Component {
         <Button
           type='primary'
           shape='circle'
-          icon={ !userName && 'user'}
+          icon={
+            !userName
+            ? 'user'
+            : ''
+          }
           size='large'
           onClick={
             !userName

@@ -23,6 +23,9 @@ import {
 } from '../../store/new-list/actions';
 import { saveNewList } from '../../utils/localStorage';
 
+/** API */
+import { saveNewList as saveNewListAPI } from '../../api/list';
+
 /** Literals */
 import { createNewListTxt, commons } from '../../utils/literals';
 
@@ -75,9 +78,21 @@ class NewList extends Component {
   };
 
   onFinishHandler = () => {
-    const { title, products, finish, resetListHandler } = this.props;
+    const {
+      title,
+      products,
+      finish,
+      resetListHandler,
+      logged,
+      userName
+    } = this.props;
     // If the last item has no name, it shouldn't be included
-    saveNewList(title, products.filter(p => p.name !== ""));
+    // If the user is logged in, save it in the server. If not, save it locally
+    if (!logged) {
+      saveNewList(title, products.filter(p => p.name !== ""));
+    } else {
+      saveNewListAPI(title, userName, products.filter(p => p.name !== ""));
+    }
     resetListHandler();
     message.success(createNewListTxt.success(title));
     finish();
@@ -177,12 +192,19 @@ NewList.propTypes = {
   cancel: PropTypes.func,
   resetListHandler: PropTypes.func,
   finish: PropTypes.func,
-  moveItemHandler: PropTypes.func
+  moveItemHandler: PropTypes.func,
+  logged: PropTypes.bool,
+  userName: PropTypes.string
 };
 
-const mapStateToProps = ({ newListReducer: { products, title } }) => ({
+const mapStateToProps = ({
+  newListReducer: { products, title },
+  userReducer: { logged, userName }
+}) => ({
   products,
-  title
+  title,
+  logged,
+  userName
 });
 
 const mapDispatchToProps = dispatch => ({
