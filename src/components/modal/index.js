@@ -14,7 +14,9 @@ const SLModal = ({
   onCancel,
   onContinue,
   children,
-  title
+  title,
+  cancelDisabled,
+  continueDisabled
 }) => (
   <Modal
     visible
@@ -23,10 +25,15 @@ const SLModal = ({
     closable={false}
     centered
     footer={[
-      <Button key='cancel' onClick={onCancel}>
+      <Button key='cancel' onClick={onCancel} disabled={cancelDisabled}>
         {commons.cancel}
       </Button>,
-      <Button key='continue' type='primary' onClick={onContinue}>
+      <Button
+        key='continue'
+        type='primary'
+        onClick={onContinue}
+        disabled={continueDisabled}
+      >
         {commons.continue}
       </Button>
     ]}
@@ -39,7 +46,14 @@ SLModal.propTypes = {
   onCancel: PropTypes.func,
   onContinue: PropTypes.func,
   children: childrenModel,
-  title: PropTypes.string
+  title: PropTypes.string,
+  cancelDisabled: PropTypes.bool,
+  continueDisabled: PropTypes.bool
+};
+
+SLModal.defaultProps = {
+  cancelDisabled: false,
+  continueDisabled: false
 };
 
 export default SLModal;
