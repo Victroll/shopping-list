@@ -11,7 +11,7 @@ import { Button } from 'antd';
 import Login from '../login';
 
 /** Actions */
-import { logOut } from '../../store/user/actions';
+import { logOut, logInWithToken } from '../../store/user/actions';
 
 /** Styles */
 import './index.css';
@@ -19,6 +19,11 @@ import './index.css';
 class LoginButton extends Component {
   state = {
     showLogin: false
+  };
+
+  componentDidMount() {
+    const { _logInWithToken } = this.props;
+    _logInWithToken();
   };
 
   toggleLogin = () => {
@@ -58,7 +63,8 @@ class LoginButton extends Component {
 
 LoginButton.propTypes = {
   userName: PropTypes.string,
-  _logOut: PropTypes.func
+  _logOut: PropTypes.func,
+  _logInWithToken: PropTypes.func
 };
 
 const mapStateToProps = ({ userReducer: { userName }}) => ({
@@ -66,7 +72,8 @@ const mapStateToProps = ({ userReducer: { userName }}) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  _logOut: () => logOut(dispatch)
+  _logOut: () => logOut(dispatch),
+  _logInWithToken: () => logInWithToken(dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginButton);
