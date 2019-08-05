@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+/** Redux */
+import { connect } from 'react-redux';
 
 /** antd */
 import { Button } from 'antd';
 
 /** Components */
 import Login from '../login';
+
+/** Actions */
+import { logOut } from '../../store/user/actions';
 
 /** Styles */
 import './index.css';
@@ -21,21 +28,45 @@ class LoginButton extends Component {
     });
   }
 
+  logOut = () => {
+    const { _logOut } = this.props;
+    _logOut();
+  }
+
   render() {
+    const { userName } = this.props;
     const { showLogin } = this.state;
     return (
       <div className='login-button'>
         <Button
           type='primary'
           shape='circle'
-          icon='user'
+          icon={ !userName && 'user'}
           size='large'
-          onClick={this.toggleLogin}
-        />
+          onClick={
+            !userName
+            ? this.toggleLogin
+            : this.logOut}
+        >
+          {userName && userName.charAt(0)}
+        </Button>
         {showLogin && <Login onCancel={this.toggleLogin}/>}
       </div>
     );
   };
 }
 
-export default LoginButton;
+LoginButton.propTypes = {
+  userName: PropTypes.string,
+  _logOut: PropTypes.func
+};
+
+const mapStateToProps = ({ userReducer: { userName }}) => ({
+  userName
+});
+
+const mapDispatchToProps = dispatch => ({
+  _logOut: () => logOut(dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginButton);

@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+/** Redux */
+import { connect } from 'react-redux';
+
 /** antd  */
 import { Input } from 'antd';
+
+/** Actions */
+import { logIn } from '../../store/user/actions';
 
 /** Components */
 import SLModal from '../modal';
@@ -13,15 +19,30 @@ class Login extends Component {
     loginPass: ''
   };
 
-  updateField = field => ({ target: { value } }) => this.setState({
-    [field]: value
-  });
+  componentDidUpdate({ logged: previousLogged }) {
+    const { logged, onCancel } = this.props;
+    if (!previousLogged && logged) {
+      onCancel();
+    }
+  }
+
+  updateField = field => ({ target: { value } }) => {
+    this.setState({
+      [field]: value
+    });
+  }
+
+  logIn = () => {
+    const { _logIn } = this.props;
+    const { loginInput, loginPass } = this.state;
+    _logIn(loginInput, loginPass);
+  }
 
   render() {
-    const { onCancel, onContinue } = this.props;
+    const { onCancel } = this.props;
     const { loginInput, loginPass } = this.state;
     return (
-      <SLModal title='Login' onCancel={onCancel} onContinue={onContinue}>
+      <SLModal title='Login' onCancel={onCancel} onContinue={this.logIn}>
         <div>
           <h2>Usuario</h2>
           <Input
@@ -43,7 +64,16 @@ class Login extends Component {
 
 Login.propTypes = {
   onCancel: PropTypes.func,
-  onContinue: PropTypes.func
+  _logIn: PropTypes.func,
+  logged: PropTypes.bool
 };
 
-export default Login;
+const mapStateToProps = ({ userReducer: { logged }}) => ({
+  logged
+});
+
+const mapDispatchToProps = dispatch => ({
+  _logIn: (user, password) => logIn(user, password, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
