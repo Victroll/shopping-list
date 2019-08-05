@@ -15,3 +15,16 @@ export const saveNewList = (title, owner, products) => {
     products: JSON.stringify(products)
   });
 };
+
+export const getAllLists = owner => {
+  axios
+    .defaults
+    .headers
+    .common
+    .Authorization = sessionStorage.getItem(sessionStorageToken);
+  return axios.get('http://localhost:3214/list/all', {
+    params: {
+      owner
+    }
+  });
+};

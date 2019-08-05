@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+
+/** Redux */
 import { connect } from 'react-redux';
 
 /** antd  */
@@ -10,6 +12,9 @@ import ButtonWrapper from '../button-wrapper';
 import ListsTableItem from '../lists-table-item';
 import ListsTableWrapper from '../lists-table-wrapper';
 import SLModal from '../modal';
+
+/** API */
+import { getAllLists } from '../../api/list';
 
 /** Actions */
 import { getLists, removeList } from '../../utils/localStorage';
@@ -41,9 +46,15 @@ class ListsTable extends Component {
   }
   
   componentDidMount() {
-    this.setState({
-      lists: getLists()
-    });
+    const { logged, userName } = this.props;
+    // If the user is logged, get the list from the server
+    if (!logged) {
+      this.setState({
+        lists: getLists()
+      });
+    } else {
+      getAllLists(userName).then(({ data }) => this.setState({ lists: data }));
+    }
   }
 
   onCreateHandle = () => {
@@ -155,11 +166,20 @@ ListsTable.propTypes = {
   currentList: PropTypes.string,
   setListHandler: PropTypes.func,
   saveTitleHandler: PropTypes.func,
-  setEditListHandler: PropTypes.func
+  setEditListHandler: PropTypes.func,
+  logged: PropTypes.bool,
+  userName: PropTypes.string
 };
 
-const mapStateToProps = ({ showListReducer: { title } }) => ({
-  currentList: title
+const mapStateToProps = (
+  {
+    showListReducer: { title },
+    userReducer: { logged, userName }
+  }
+) => ({
+  currentList: title,
+  logged,
+  userName
 });
 
 const mapDispatchToProps = dispatch => ({
