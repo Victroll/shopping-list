@@ -24,7 +24,10 @@ import {
 import { saveNewList } from '../../utils/localStorage';
 
 /** API */
-import { saveNewList as saveNewListAPI } from '../../api/list';
+import {
+  saveNewList as saveNewListAPI,
+  saveList as saveListAPI
+} from '../../api/list';
 
 /** Literals */
 import { createNewListTxt, commons } from '../../utils/literals';
@@ -42,7 +45,8 @@ class NewList extends Component {
     this.state = {
       activeKey: '0',
       showCancelModal: false,
-      showFinishModal: false
+      showFinishModal: false,
+      isNew: products.length === 0
     };
 
     if (products.length === 0) {
@@ -86,12 +90,16 @@ class NewList extends Component {
       logged,
       userName
     } = this.props;
+    const { isNew } = this.state;
     // If the last item has no name, it shouldn't be included
     // If the user is logged in, save it in the server. If not, save it locally
     if (!logged) {
       saveNewList(title, products.filter(p => p.name !== ""));
-    } else {
+    // If the list is new, create it. If it isn't, save it
+    } else if (isNew) {
       saveNewListAPI(title, userName, products.filter(p => p.name !== ""));
+    } else {
+      saveListAPI(title, userName, products.filter(p => p.name !== ""));
     }
     resetListHandler();
     message.success(createNewListTxt.success(title));

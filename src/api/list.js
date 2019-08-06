@@ -16,6 +16,18 @@ export const saveNewList = (title, owner, products) => {
   });
 };
 
+export const saveList = (title, owner, products) => {
+  axios
+    .defaults
+    .headers
+    .common
+    .Authorization = sessionStorage.getItem(sessionStorageToken);
+  axios.post(`http://localhost:3214/list/single/${title}`, {
+    owner,
+    products: JSON.stringify(products)
+  });
+};
+
 export const getAllLists = owner => {
   axios
     .defaults
