@@ -49,8 +49,8 @@ class Login extends Component {
             showError(loginTxt.login404);
             break;
           case 403:
-              showError(loginTxt.login403);
-              break;
+            showError(loginTxt.login403);
+            break;
           default:
             showError(error.response.data);
         }

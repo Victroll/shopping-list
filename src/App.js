@@ -23,7 +23,11 @@ import FlowStateMachine from './utils/flowStateMachine';
 import paths from './utils/paths';
 
 /** States */
-import { createNewListStates, showListStates } from './utils/flowStates';
+import {
+  createNewListStates,
+  showListStates,
+  settingsStates
+} from './utils/flowStates';
 
 import store from './store';
 
@@ -68,6 +72,19 @@ const App = () => (
                   <FlowStateMachine
                     {...props}
                     stateList={showListStates}
+                    allowRecursivity
+                  />
+                </AppLayout>
+              )}
+            />
+            <Route
+              exact
+              path={paths.settings}
+              render={props => (
+                <AppLayout>
+                  <FlowStateMachine
+                    {...props}
+                    stateList={settingsStates}
                     allowRecursivity
                   />
                 </AppLayout>
