@@ -14,7 +14,7 @@ import ListsTableWrapper from '../lists-table-wrapper';
 import SLModal from '../modal';
 
 /** API */
-import { getAllLists } from '../../api/list';
+import { getAllLists, deleteList } from '../../api/list';
 
 /** Actions */
 import { getLists, removeList } from '../../utils/localStorage';
@@ -23,6 +23,9 @@ import {
   saveTitle,
   setList as setEditList
 } from '../../store/new-list/actions';
+
+/** Messages */
+import { showSuccess, showError } from '../../utils/messages';
 
 /** Literals */
 import { commons, homeTxt, showListsTable } from '../../utils/literals';
@@ -63,8 +66,18 @@ class ListsTable extends Component {
   }
 
   onDeleteHandler = id => {
-    const lists = removeList(id);
-    this.setState({ lists });
+    const { logged, userName } = this.props;
+    // If the user is logged, delete the list in the server
+    if (!logged) {
+      this.setState({ lists: removeList(id) });
+    } else {
+      deleteList(id, userName)
+        .then(({ data }) => {
+          showSuccess('Lista eliminada');
+          this.setState({ lists: data });
+        })
+        .catch(error => showError(error.response.data));
+    }
   };
 
   onShowListHandler = id => {

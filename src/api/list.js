@@ -41,3 +41,16 @@ export const getAllLists = owner => {
     }
   });
 };
+
+export const deleteList = (title, owner) => {
+  axios
+    .defaults
+    .headers
+    .common
+    .Authorization = sessionStorage.getItem(sessionStorageToken);
+  return axios.delete(`http://localhost:3214/list/single/${title}`, {
+    params: {
+      owner
+    }
+  });
+};
