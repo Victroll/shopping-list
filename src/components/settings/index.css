@@ -1,0 +1,7 @@
+.settings-wrapper {
+  width: 100%;
+}
+
+.settings-wrapper > h2 {
+  padding-top: 1rem;
+}

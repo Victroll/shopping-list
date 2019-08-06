@@ -2,6 +2,7 @@ import * as TYPES from './actionTypes';
 
 const initialState = {
   title: '',
+  prevTitle: '',
   products: []
 };
 
@@ -53,7 +54,8 @@ const reducer = (state = initialState, action) => {
     case TYPES.SAVE_TITLE:
       return {
         ...state,
-        title: action.title
+        title: action.title,
+        prevTitle: state.title
       };
     case TYPES.ADD_PRODUCT:
       newProducts = [...state.products];

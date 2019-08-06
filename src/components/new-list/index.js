@@ -23,6 +23,12 @@ import {
 } from '../../store/new-list/actions';
 import { saveNewList } from '../../utils/localStorage';
 
+/** API */
+import {
+  saveNewList as saveNewListAPI,
+  saveList as saveListAPI
+} from '../../api/list';
+
 /** Literals */
 import { createNewListTxt, commons } from '../../utils/literals';
 
@@ -39,7 +45,8 @@ class NewList extends Component {
     this.state = {
       activeKey: '0',
       showCancelModal: false,
-      showFinishModal: false
+      showFinishModal: false,
+      isNew: products.length === 0
     };
 
     if (products.length === 0) {
@@ -75,9 +82,32 @@ class NewList extends Component {
   };
 
   onFinishHandler = () => {
-    const { title, products, finish, resetListHandler } = this.props;
+    const {
+      title,
+      prevTitle,
+      products,
+      finish,
+      resetListHandler,
+      logged,
+      userName
+    } = this.props;
+    const { isNew } = this.state;
     // If the last item has no name, it shouldn't be included
-    saveNewList(title, products.filter(p => p.name !== ""));
+    // If the user is logged in, save it in the server. If not, save it locally
+    if (!logged) {
+      saveNewList(title, products.filter(p => p.name !== ""));
+    // If the list is new, create it. If it isn't, save it
+    } else if (isNew) {
+      saveNewListAPI(title, userName, products.filter(p => p.name !== ""));
+    } else {
+      saveListAPI(
+        prevTitle === ''
+          ? title
+          : prevTitle,
+        title, userName,
+        products.filter(p => p.name !== "")
+      );
+    }
     resetListHandler();
     message.success(createNewListTxt.success(title));
     finish();
@@ -177,12 +207,21 @@ NewList.propTypes = {
   cancel: PropTypes.func,
   resetListHandler: PropTypes.func,
   finish: PropTypes.func,
-  moveItemHandler: PropTypes.func
+  moveItemHandler: PropTypes.func,
+  logged: PropTypes.bool,
+  userName: PropTypes.string,
+  prevTitle: PropTypes.string
 };
 
-const mapStateToProps = ({ newListReducer: { products, title } }) => ({
+const mapStateToProps = ({
+  newListReducer: { products, title, prevTitle },
+  userReducer: { logged, userName }
+}) => ({
   products,
-  title
+  title,
+  prevTitle,
+  logged,
+  userName
 });
 
 const mapDispatchToProps = dispatch => ({

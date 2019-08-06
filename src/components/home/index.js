@@ -1,4 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+/** Redux */
+import { connect } from 'react-redux';
 
 /** Components */
 import HomeCard from '../home-card';
@@ -33,7 +37,11 @@ const goToShowLists = history => {
   history.push(paths.showLists);
 };
 
-const Home = ({ history }) => (
+const goToSettings = history => {
+  history.push(paths.settings);
+};
+
+const Home = ({ history, logged }) => (
   <div className='home'>
     <HomeCard
       icon="profile"
@@ -51,12 +59,19 @@ const Home = ({ history }) => (
       icon="setting"
       title={homeTxt.settings}
       buttonTxt={homeTxt.settingsButton}
+      onClick={() => goToSettings(history)}
+      disabled={!logged}
     />
   </div>
 );
 
 Home.propTypes = {
-  history: historyModel
+  history: historyModel,
+  logged: PropTypes.bool
 };
 
-export default Home;
+const mapStateToProps = ({ userReducer: { logged }}) => ({
+  logged
+});
+
+export default connect(mapStateToProps)(Home);

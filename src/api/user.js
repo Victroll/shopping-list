@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+/** Constants */
+import { sessionStorageToken } from '../utils/constants';
+
 export const logIn = (user, password) =>
   axios.post('http://localhost:3214/user/login', {
     name: user,
@@ -10,3 +13,16 @@ export const logInWithToken = token =>
   axios.post('http://localhost:3214/user/login', {
     userToken: token
   });
+
+export const changePassword = newPassword => {
+  axios
+    .defaults
+    .headers
+    .common
+    .Authorization = sessionStorage.getItem(sessionStorageToken);
+  return axios.post('http://localhost:3214/user/changePAssword', {
+    password: newPassword
+  }).then(({ data: { token } }) => {
+    sessionStorage.setItem(sessionStorageToken,  token);
+  });
+};

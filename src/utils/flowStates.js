@@ -2,6 +2,7 @@ import NewTitle from '../components/new-title';
 import NewList from '../components/new-list';
 import ListsTable from '../components/lists-table';
 import List from '../components/list';
+import Settings from '../components/settings';
 
 export const createNewListStates = [
   {
@@ -18,6 +19,17 @@ export const createNewListStates = [
     inputs: {
       cancel: -1,
       prev: 0,
+      finish: -1
+    }
+  }
+];
+
+export const settingsStates = [
+  {
+    // 0
+    component: Settings,
+    inputs: {
+      cancel: -1,
       finish: -1
     }
   }

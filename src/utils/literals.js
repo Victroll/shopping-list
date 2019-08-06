@@ -7,7 +7,10 @@ export const loginTxt = {
   userPlaceholder: 'Introduce tu usuario',
   passwordPlaceholder: 'Introduce tu contraseña',
   userTitle: 'Usuario',
-  passwordTitle: 'Contraseña'
+  passwordTitle: 'Contraseña',
+  passwordChangeSuccess: '¡Password cambiado con éxito!',
+  newPassword: 'Nuevo password',
+  confirmPassword: 'Confirme el password'
 };
 
 export const homeTxt = {
