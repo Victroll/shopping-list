@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 /** Redux */
 import { connect } from 'react-redux';
 
-/** antd  */
+/** Antd  */
 import { Input } from 'antd';
 
 /** Actions */
@@ -36,7 +36,7 @@ class Login extends Component {
     this.setState({
       [field]: value
     });
-  }
+  };
 
   logIn = () => {
     const { _logIn } = this.props;
@@ -44,7 +44,7 @@ class Login extends Component {
     _logIn(loginInput, loginPass)
       .then(() => showSuccess(loginTxt.loginSuccess))
       .catch(error => {
-        switch(error.response.status) {
+        switch (error.response.status) {
           case 404:
             showError(loginTxt.login404);
             break;
@@ -55,14 +55,14 @@ class Login extends Component {
             showError(error.response.data);
         }
       });
-  }
+  };
 
   render() {
     const { onCancel } = this.props;
     const { loginInput, loginPass } = this.state;
     return (
-      <SLModal 
-        title='Login'
+      <SLModal
+        title="Login"
         onCancel={onCancel}
         onContinue={this.logIn}
         continueDisabled={!loginInput || !loginPass}
@@ -87,12 +87,12 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  onCancel: PropTypes.func,
-  _logIn: PropTypes.func,
-  logged: PropTypes.bool
+  onCancel: PropTypes.func.isRequired,
+  _logIn: PropTypes.func.isRequired,
+  logged: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = ({ userReducer: { logged }}) => ({
+const mapStateToProps = ({ userReducer: { logged } }) => ({
   logged
 });
 
@@ -100,4 +100,7 @@ const mapDispatchToProps = dispatch => ({
   _logIn: (user, password) => logIn(user, password, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

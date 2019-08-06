@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-/** antd */
+/** Antd */
 import { Input, Button } from 'antd';
 
 /** Components */
@@ -25,7 +25,7 @@ class Settings extends Component {
     pass2: ''
   };
 
-  updateField = field => ({ target: { value }}) => {
+  updateField = field => ({ target: { value } }) => {
     this.setState({ [field]: value });
   };
 
@@ -38,7 +38,7 @@ class Settings extends Component {
         finish();
       })
       .catch(error => {
-        switch(error.response.status) {
+        switch (error.response.status) {
           case 404:
             showError(loginTxt.login404);
             break;
@@ -73,7 +73,7 @@ class Settings extends Component {
           <Button onClick={cancel}>{commons.cancel}</Button>
           <Button
             onClick={this.onContinueHandler}
-            type='primary'
+            type="primary"
             disabled={pass1 !== pass2 || !pass2 || !pass1}
           >
             {commons.continue}
@@ -85,8 +85,8 @@ class Settings extends Component {
 }
 
 Settings.propTypes = {
-  cancel: PropTypes.func,
-  finish: PropTypes.func
+  cancel: PropTypes.func.isRequired,
+  finish: PropTypes.func.isRequired
 };
 
 export default Settings;

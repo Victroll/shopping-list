@@ -11,7 +11,7 @@ import { sessionStorageToken } from '../../utils/constants';
 
 export const logIn = (user, password, dispatch) =>
   logInAPI(user, password).then(({ data: { token } }) => {
-    sessionStorage.setItem(sessionStorageToken,  token);
+    sessionStorage.setItem(sessionStorageToken, token);
     dispatch({ type: LOG_IN, user });
   });
 
@@ -23,10 +23,12 @@ export const logOut = dispatch => {
 export const logInWithToken = dispatch => {
   const token = sessionStorage.getItem(sessionStorageToken);
   if (token) {
-    logInWithTokenAPI(token).then(({ data: { userName }}) => {
-      if (userName) {
-        dispatch({ type: LOG_IN, user: userName });
-      }
-    }).catch(() => sessionStorage.removeItem(sessionStorageToken));
+    logInWithTokenAPI(token)
+      .then(({ data: { userName } }) => {
+        if (userName) {
+          dispatch({ type: LOG_IN, user: userName });
+        }
+      })
+      .catch(() => sessionStorage.removeItem(sessionStorageToken));
   }
 };

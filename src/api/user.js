@@ -15,14 +15,14 @@ export const logInWithToken = token =>
   });
 
 export const changePassword = newPassword => {
-  axios
-    .defaults
-    .headers
-    .common
-    .Authorization = sessionStorage.getItem(sessionStorageToken);
-  return axios.post('http://localhost:3214/user/changePAssword', {
-    password: newPassword
-  }).then(({ data: { token } }) => {
-    sessionStorage.setItem(sessionStorageToken,  token);
-  });
+  axios.defaults.headers.common.Authorization = sessionStorage.getItem(
+    sessionStorageToken
+  );
+  return axios
+    .post('http://localhost:3214/user/changePAssword', {
+      password: newPassword
+    })
+    .then(({ data: { token } }) => {
+      sessionStorage.setItem(sessionStorageToken, token);
+    });
 };

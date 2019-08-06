@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 /** Redux */
 import { connect } from 'react-redux';
 
-/** antd  */
+/** Antd  */
 import { List, Button } from 'antd';
 
 /** Components */
@@ -47,7 +47,7 @@ class ListsTable extends Component {
       nextId: null
     };
   }
-  
+
   componentDidMount() {
     const { logged, userName } = this.props;
     // If the user is logged, get the list from the server
@@ -63,7 +63,7 @@ class ListsTable extends Component {
   onCreateHandle = () => {
     const { history } = this.props;
     history.push(paths.newList);
-  }
+  };
 
   onDeleteHandler = id => {
     const { logged, userName } = this.props;
@@ -87,21 +87,22 @@ class ListsTable extends Component {
     if (currentList !== null && id !== currentList) {
       this.onToggleModal(id);
     } else if (currentList === null) {
-        this.onStoreAndShowListHandler(id);
+      this.onStoreAndShowListHandler(id);
     } else {
-      next();      
+      next();
     }
-  }
+  };
 
   onStoreAndShowListHandler = id => {
     const { setListHandler, next } = this.props;
     const { lists } = this.state;
-    setListHandler(id, lists[id].map(
-      prod => ({
+    setListHandler(
+      id,
+      lists[id].map(prod => ({
         ...prod,
         caught: false
-      })
-    ));
+      }))
+    );
     next();
   };
 
@@ -124,35 +125,30 @@ class ListsTable extends Component {
     return (
       <Fragment>
         <ListsTableWrapper>
-          {Object.keys(lists).length === 0
-            ? <List />
-            : (
-              <List
-                className='lists-table'
-                bordered
-                dataSource={
-                  Object.keys(lists).map(title => ({
-                    title,
-                    count: lists[title].length
-                  }))
-                }
-                renderItem={item => (
-                  <ListsTableItem
-                    title={item.title}
-                    count={item.count}
-                    onDelete={this.onDeleteHandler}
-                    onShow={this.onShowListHandler}
-                    onEdit={this.onEditListHandler}
-                  />
-                )}
-              />
-            )
-          }
+          {Object.keys(lists).length === 0 ? (
+            <List />
+          ) : (
+            <List
+              className="lists-table"
+              bordered
+              dataSource={Object.keys(lists).map(title => ({
+                title,
+                count: lists[title].length
+              }))}
+              renderItem={item => (
+                <ListsTableItem
+                  title={item.title}
+                  count={item.count}
+                  onDelete={this.onDeleteHandler}
+                  onShow={this.onShowListHandler}
+                  onEdit={this.onEditListHandler}
+                />
+              )}
+            />
+          )}
           <ButtonWrapper>
-            <Button onClick={prev}>
-              {commons.back}
-            </Button>
-            <Button type='primary' onClick={this.onCreateHandle}>
+            <Button onClick={prev}>{commons.back}</Button>
+            <Button type="primary" onClick={this.onCreateHandle}>
               {homeTxt.newListButton}
             </Button>
           </ButtonWrapper>
@@ -172,24 +168,22 @@ class ListsTable extends Component {
 }
 
 ListsTable.propTypes = {
-  prev: PropTypes.func,
-  next: PropTypes.func,
-  edit: PropTypes.func,
-  history: historyModel,
-  currentList: PropTypes.string,
-  setListHandler: PropTypes.func,
-  saveTitleHandler: PropTypes.func,
-  setEditListHandler: PropTypes.func,
-  logged: PropTypes.bool,
-  userName: PropTypes.string
+  prev: PropTypes.func.isRequired,
+  next: PropTypes.func.isRequired,
+  edit: PropTypes.func.isRequired,
+  history: historyModel.isRequired,
+  currentList: PropTypes.string.isRequired,
+  setListHandler: PropTypes.func.isRequired,
+  saveTitleHandler: PropTypes.func.isRequired,
+  setEditListHandler: PropTypes.func.isRequired,
+  logged: PropTypes.bool.isRequired,
+  userName: PropTypes.string.isRequired
 };
 
-const mapStateToProps = (
-  {
-    showListReducer: { title },
-    userReducer: { logged, userName }
-  }
-) => ({
+const mapStateToProps = ({
+  showListReducer: { title },
+  userReducer: { logged, userName }
+}) => ({
   currentList: title,
   logged,
   userName

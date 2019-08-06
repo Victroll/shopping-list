@@ -3,15 +3,11 @@ import React from 'react';
 /** Redux */
 import { Provider } from 'react-redux';
 
-/** antd */
+/** Antd */
 import { Layout } from 'antd';
 
 /** Router */
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 /** Components */
 import Home from './components/home';
@@ -41,15 +37,13 @@ const App = () => (
     <Layout>
       <GitHubCorner />
       <LoginButton />
-      <Content className='content'>
+      <Content className="content">
         <Router basename={process.env.PUBLIC_URL}>
           <Switch>
             <Route
               exact
               path={paths.home}
-              render={props => (
-                <Home {...props} />
-              )}
+              render={props => <Home {...props} />}
             />
             <Route
               exact

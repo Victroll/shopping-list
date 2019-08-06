@@ -41,17 +41,18 @@ export const createNewListTxt = {
   newProduct: {
     title: 'Nuevo producto',
     name: 'Nombre del producto',
-    namePlaceholder: () => Faker.random.array_element([
-      'Berenjenas',
-      'Champú',
-      'Fregona',
-      'Comida del perro',
-      'Cebollas',
-      'Latas de tomate',
-      'Arroz',
-      'Friegaplatos',
-      'Pilas'
-    ]),
+    namePlaceholder: () =>
+      Faker.random.array_element([
+        'Berenjenas',
+        'Champú',
+        'Fregona',
+        'Comida del perro',
+        'Cebollas',
+        'Latas de tomate',
+        'Arroz',
+        'Friegaplatos',
+        'Pilas'
+      ]),
     amount: 'Cantidad',
     kg: '.kgs',
     uds: '.uds'
