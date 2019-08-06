@@ -12,6 +12,7 @@ import { logIn } from '../../store/user/actions';
 
 /** Components */
 import SLModal from '../modal';
+import Loader from '../loader';
 
 /** Messages */
 import { showSuccess, showError } from '../../utils/messages';
@@ -22,7 +23,8 @@ import { loginTxt } from '../../utils/literals';
 class Login extends Component {
   state = {
     loginInput: '',
-    loginPass: ''
+    loginPass: '',
+    isLoading: false
   };
 
   componentDidUpdate({ logged: previousLogged }) {
@@ -41,6 +43,7 @@ class Login extends Component {
   logIn = () => {
     const { _logIn } = this.props;
     const { loginInput, loginPass } = this.state;
+    this.setState({ isLoading: true });
     _logIn(loginInput, loginPass)
       .then(() => showSuccess(loginTxt.loginSuccess))
       .catch(error => {
@@ -54,13 +57,16 @@ class Login extends Component {
           default:
             showError(error.response.data);
         }
-      });
+      })
+      .finally(() => this.setState({ isLoading: false }));
   };
 
   render() {
     const { onCancel } = this.props;
-    const { loginInput, loginPass } = this.state;
-    return (
+    const { loginInput, loginPass, isLoading } = this.state;
+    return isLoading ? (
+      <Loader />
+    ) : (
       <SLModal
         title="Login"
         onCancel={onCancel}

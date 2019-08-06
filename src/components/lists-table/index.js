@@ -12,6 +12,7 @@ import ButtonWrapper from '../button-wrapper';
 import ListsTableItem from '../lists-table-item';
 import ListsTableWrapper from '../lists-table-wrapper';
 import SLModal from '../modal';
+import Loader from '../loader';
 
 /** API */
 import { getAllLists, deleteList } from '../../api/list';
@@ -44,7 +45,8 @@ class ListsTable extends Component {
     this.state = {
       lists: {},
       showModal: false,
-      nextId: null
+      nextId: null,
+      isLoading: true
     };
   }
 
@@ -53,10 +55,13 @@ class ListsTable extends Component {
     // If the user is logged, get the list from the server
     if (!logged) {
       this.setState({
-        lists: getLists()
+        lists: getLists(),
+        isLoading: false
       });
     } else {
-      getAllLists(userName).then(({ data }) => this.setState({ lists: data }));
+      getAllLists(userName)
+        .then(({ data }) => this.setState({ lists: data }))
+        .finally(() => this.setState({ isLoading: false }));
     }
   }
 
@@ -121,8 +126,10 @@ class ListsTable extends Component {
 
   render() {
     const { prev } = this.props;
-    const { lists, showModal, nextId } = this.state;
-    return (
+    const { lists, showModal, nextId, isLoading } = this.state;
+    return isLoading ? (
+      <Loader />
+    ) : (
       <Fragment>
         <ListsTableWrapper>
           {Object.keys(lists).length === 0 ? (
