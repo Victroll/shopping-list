@@ -84,6 +84,7 @@ class NewList extends Component {
   onFinishHandler = () => {
     const {
       title,
+      prevTitle,
       products,
       finish,
       resetListHandler,
@@ -99,7 +100,13 @@ class NewList extends Component {
     } else if (isNew) {
       saveNewListAPI(title, userName, products.filter(p => p.name !== ""));
     } else {
-      saveListAPI(title, userName, products.filter(p => p.name !== ""));
+      saveListAPI(
+        prevTitle === ''
+          ? title
+          : prevTitle,
+        title, userName,
+        products.filter(p => p.name !== "")
+      );
     }
     resetListHandler();
     message.success(createNewListTxt.success(title));
@@ -202,15 +209,17 @@ NewList.propTypes = {
   finish: PropTypes.func,
   moveItemHandler: PropTypes.func,
   logged: PropTypes.bool,
-  userName: PropTypes.string
+  userName: PropTypes.string,
+  prevTitle: PropTypes.string
 };
 
 const mapStateToProps = ({
-  newListReducer: { products, title },
+  newListReducer: { products, title, prevTitle },
   userReducer: { logged, userName }
 }) => ({
   products,
   title,
+  prevTitle,
   logged,
   userName
 });

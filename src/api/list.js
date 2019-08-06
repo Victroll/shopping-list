@@ -16,7 +16,7 @@ export const saveNewList = (title, owner, products) => {
   });
 };
 
-export const saveList = (title, owner, products) => {
+export const saveList = (title, newTitle, owner, products) => {
   axios
     .defaults
     .headers
@@ -24,6 +24,7 @@ export const saveList = (title, owner, products) => {
     .Authorization = sessionStorage.getItem(sessionStorageToken);
   axios.post(`http://localhost:3214/list/single/${title}`, {
     owner,
+    newName: newTitle,
     products: JSON.stringify(products)
   });
 };
