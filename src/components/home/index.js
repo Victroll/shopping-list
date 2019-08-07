@@ -38,8 +38,8 @@ const goToShowLists = history => {
   history.push(paths.showLists);
 };
 
-const goToSettings = history => {
-  history.push(paths.settings);
+const goToExpenses = history => {
+  history.push(paths.expenses);
 };
 
 const Home = ({ history, logged }) => (
@@ -59,10 +59,10 @@ const Home = ({ history, logged }) => (
         onClick={() => goToCreateNewList(history)}
       />
       <HomeCard
-        icon="setting"
-        title={homeTxt.settings}
-        buttonTxt={homeTxt.settingsButton}
-        onClick={() => goToSettings(history)}
+        icon="euro"
+        title={homeTxt.expenses}
+        buttonTxt={homeTxt.expensesButton}
+        onClick={() => goToExpenses(history)}
         disabled={!logged}
       />
     </div>

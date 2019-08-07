@@ -20,7 +20,9 @@ export const homeTxt = {
   newList: 'Crear nueva lista',
   newListButton: 'Crear',
   settings: 'Ajustes de usuario',
-  settingsButton: 'Ajustes'
+  settingsButton: 'Ajustes',
+  expenses: 'Gestionar gastos',
+  expensesButton: 'Gastos'
 };
 
 export const showListsTable = {

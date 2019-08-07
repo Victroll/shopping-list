@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-/** antd  */
+/** Antd  */
 import { Button, Modal } from 'antd';
 
 /** Models */
@@ -25,12 +25,12 @@ const SLModal = ({
     closable={false}
     centered
     footer={[
-      <Button key='cancel' onClick={onCancel} disabled={cancelDisabled}>
+      <Button key="cancel" onClick={onCancel} disabled={cancelDisabled}>
         {commons.cancel}
       </Button>,
       <Button
-        key='continue'
-        type='primary'
+        key="continue"
+        type="primary"
         onClick={onContinue}
         disabled={continueDisabled}
       >
@@ -43,10 +43,10 @@ const SLModal = ({
 );
 
 SLModal.propTypes = {
-  onCancel: PropTypes.func,
-  onContinue: PropTypes.func,
-  children: childrenModel,
-  title: PropTypes.string,
+  onCancel: PropTypes.func.isRequired,
+  onContinue: PropTypes.func.isRequired,
+  children: childrenModel.isRequired,
+  title: PropTypes.string.isRequired,
   cancelDisabled: PropTypes.bool,
   continueDisabled: PropTypes.bool
 };

@@ -14,6 +14,7 @@ import Home from './components/home';
 import GitHubCorner from './components/GitHub-corner';
 import AppLayout from './components/app-layout';
 import FlowStateMachine from './utils/flowStateMachine';
+import Expenses from './components/expenses';
 
 /** Paths */
 import paths from './utils/paths';
@@ -77,6 +78,15 @@ const App = () => (
                     stateList={settingsStates}
                     allowRecursivity
                   />
+                </AppLayout>
+              )}
+            />
+            <Route
+              exact
+              path={paths.expenses}
+              render={props => (
+                <AppLayout>
+                  <Expenses {...props} />
                 </AppLayout>
               )}
             />
