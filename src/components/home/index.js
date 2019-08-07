@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 /** Components */
 import HomeCard from '../home-card';
+import LoginButton from '../login-button';
 
 /** Literals */
 import { homeTxt } from '../../utils/literals';
@@ -22,7 +23,7 @@ import { historyModel } from '../../utils/models';
 /**
  * Navigate to Create New List section.
  * The url by default is: /create-new-list
- * @param {object} history 
+ * @param {object} history
  */
 const goToCreateNewList = history => {
   history.push(paths.newList);
@@ -31,7 +32,7 @@ const goToCreateNewList = history => {
 /**
  * Navigate to Show Lists section.
  * The url by default is: /show-lists
- * @param {object} history 
+ * @param {object} history
  */
 const goToShowLists = history => {
   history.push(paths.showLists);
@@ -42,35 +43,38 @@ const goToSettings = history => {
 };
 
 const Home = ({ history, logged }) => (
-  <div className='home'>
-    <HomeCard
-      icon="profile"
-      title={homeTxt.showLists}
-      buttonTxt={homeTxt.showListsButton}
-      onClick={() => goToShowLists(history)}
-    />
-    <HomeCard
-      icon="edit"
-      title={homeTxt.newList}
-      buttonTxt={homeTxt.newListButton}
-      onClick={() => goToCreateNewList(history)}
-    />
-    <HomeCard
-      icon="setting"
-      title={homeTxt.settings}
-      buttonTxt={homeTxt.settingsButton}
-      onClick={() => goToSettings(history)}
-      disabled={!logged}
-    />
-  </div>
+  <>
+    <LoginButton history={history} />
+    <div className="home">
+      <HomeCard
+        icon="profile"
+        title={homeTxt.showLists}
+        buttonTxt={homeTxt.showListsButton}
+        onClick={() => goToShowLists(history)}
+      />
+      <HomeCard
+        icon="edit"
+        title={homeTxt.newList}
+        buttonTxt={homeTxt.newListButton}
+        onClick={() => goToCreateNewList(history)}
+      />
+      <HomeCard
+        icon="setting"
+        title={homeTxt.settings}
+        buttonTxt={homeTxt.settingsButton}
+        onClick={() => goToSettings(history)}
+        disabled={!logged}
+      />
+    </div>
+  </>
 );
 
 Home.propTypes = {
-  history: historyModel,
-  logged: PropTypes.bool
+  history: historyModel.isRequired,
+  logged: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = ({ userReducer: { logged }}) => ({
+const mapStateToProps = ({ userReducer: { logged } }) => ({
   logged
 });
 

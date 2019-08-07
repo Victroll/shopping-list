@@ -1,7 +1,14 @@
 .settings-wrapper {
   width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 }
 
 .settings-wrapper > h2 {
   padding-top: 1rem;
+}
+
+.settings-wrapper > button {
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
 }

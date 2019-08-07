@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+/** Redux */
+import { connect } from 'react-redux';
+
 /** Antd */
 import { Input, Button } from 'antd';
 
@@ -12,6 +15,9 @@ import { showSuccess, showError } from '../../utils/messages';
 
 /** API */
 import { changePassword } from '../../api/user';
+
+/** Actions */
+import { logOut } from '../../store/user/actions';
 
 /** Literals */
 import { loginTxt, commons } from '../../utils/literals';
@@ -27,6 +33,13 @@ class Settings extends Component {
 
   updateField = field => ({ target: { value } }) => {
     this.setState({ [field]: value });
+  };
+
+  logOut = () => {
+    const { _logOut, cancel } = this.props;
+    _logOut();
+    cancel();
+    showSuccess(loginTxt.logoutSuccess);
   };
 
   onContinueHandler = () => {
@@ -79,6 +92,13 @@ class Settings extends Component {
             {commons.continue}
           </Button>
         </ButtonWrapper>
+        <Button
+          onClick={this.logOut}
+          type="danger"
+          icon="logout"
+          shape="circle"
+          size="large"
+        />
       </div>
     );
   }
@@ -86,7 +106,15 @@ class Settings extends Component {
 
 Settings.propTypes = {
   cancel: PropTypes.func.isRequired,
-  finish: PropTypes.func.isRequired
+  finish: PropTypes.func.isRequired,
+  _logOut: PropTypes.func.isRequired
 };
 
-export default Settings;
+const mapDispatchToProps = dispatch => ({
+  _logOut: () => logOut(dispatch)
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Settings);

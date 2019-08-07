@@ -10,7 +10,8 @@ export const loginTxt = {
   passwordTitle: 'Contraseña',
   passwordChangeSuccess: '¡Password cambiado con éxito!',
   newPassword: 'Nuevo password',
-  confirmPassword: 'Confirme el password'
+  confirmPassword: 'Confirme el password',
+  logoutSuccess: 'Desconectado'
 };
 
 export const homeTxt = {
